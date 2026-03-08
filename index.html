@@ -1,0 +1,1278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Talent Advisor Intake Form</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Modern Professional Palette */
+            --primary-blue: #2563eb; 
+            --primary-dark: #1e40af;
+            --secondary-bg: #f8fafc; 
+            --white: #ffffff;
+            --text-main: #1e293b; 
+            --text-secondary: #64748b; 
+            --border-color: #cbd5e1; 
+            --input-hover: #f1f5f9;
+            --danger-red: #ef4444;
+            --accent-blue: #eff6ff; 
+            --success-green: #10b981;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-main);
+            line-height: 1.5;
+            margin: 0;
+            padding: 20px;
+            /* Subtle dot pattern for a premium background feel */
+            background-color: #e2e8f0;
+            background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+            background-size: 20px 20px;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        /* Page Container */
+        .page {
+            background-color: var(--white);
+            width: 100%;
+            max-width: 900px;
+            padding: 50px;
+            /* Smoother, deeper shadow for lift */
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            box-sizing: border-box;
+            border-radius: 16px;
+            margin-bottom: 80px;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid rgba(255,255,255,0.5);
+        }
+
+        /* --- Header & Footer Areas --- */
+        .logo-header {
+            width: 100%;
+            margin-bottom: 30px;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        .logo-header img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .page-footer {
+            margin-top: 50px;
+            width: 100%;
+            overflow: hidden;
+            border-radius: 8px;
+            opacity: 0.9;
+        }
+
+        .page-footer img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Typography */
+        h1 {
+            text-align: center;
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--primary-blue);
+            margin: 0 0 35px 0;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+            position: relative;
+            padding-bottom: 18px;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-blue), var(--primary-dark));
+            border-radius: 3px;
+        }
+
+        h2 {
+            font-size: 15px;
+            margin: 40px 0 20px 0;
+            font-weight: 700;
+            color: var(--white);
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-dark));
+            padding: 12px 18px;
+            border-radius: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.25);
+            display: inline-block;
+            min-width: 200px;
+        }
+
+        .section-content {
+            padding: 25px;
+            background-color: var(--secondary-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            margin-bottom: 30px;
+            transition: border-color 0.2s;
+        }
+        
+        .section-content:hover {
+            border-color: #94a3b8;
+        }
+
+        /* Inputs & Fields */
+        .header-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .header-field {
+            font-size: 14px;
+            display: flex;
+            align-items: baseline;
+            width: 100%;
+            flex-wrap: wrap;
+        }
+
+        .header-field span {
+            font-weight: 600;
+            color: var(--text-main);
+            margin-right: 12px;
+            white-space: nowrap;
+            min-width: 80px;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+        }
+
+        .underline {
+            flex-grow: 1;
+            border-bottom: 2px solid var(--border-color);
+            margin-left: 5px;
+            display: flex;
+            min-width: 100px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .underline:hover {
+            border-bottom-color: #94a3b8;
+        }
+
+        .underline:focus-within {
+            border-bottom-color: var(--primary-blue);
+        }
+
+        input[type="text"], input[type="number"], input[type="date"], select {
+            width: 100%;
+            border: none;
+            background: transparent;
+            font-family: inherit;
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--text-main);
+            outline: none;
+            padding: 6px 4px;
+            min-height: 30px;
+            transition: background-color 0.2s;
+        }
+        
+        input[type="text"]:focus, input[type="number"]:focus {
+            background-color: rgba(37, 99, 235, 0.03);
+        }
+        
+        input[type="date"], select {
+            cursor: pointer;
+        }
+
+        textarea {
+            width: 100%;
+            border: 1px solid var(--border-color);
+            background-color: var(--white);
+            padding: 15px;
+            border-radius: 8px;
+            resize: vertical;
+            min-height: 90px;
+            font-family: inherit;
+            font-size: 14px;
+            color: var(--text-main);
+            transition: all 0.2s;
+            box-sizing: border-box;
+            line-height: 1.6;
+        }
+
+        textarea:focus {
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+            outline: none;
+        }
+
+        /* Choice Groups (Radios & Checkboxes) */
+        .choice-group {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .choice-item {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-main);
+            cursor: pointer;
+            padding: 6px 10px;
+            border-radius: 6px;
+            transition: background-color 0.2s;
+            position: relative;
+            user-select: none;
+        }
+
+        .choice-item:hover {
+            background-color: rgba(37, 99, 235, 0.08);
+        }
+
+        .choice-item input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 100%;
+            width: 100%;
+            top: 0; left: 0;
+            z-index: 2;
+        }
+
+        .indicator {
+            border: 2px solid #cbd5e1;
+            margin-right: 10px;
+            background: var(--white);
+            display: inline-block;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            flex-shrink: 0;
+            z-index: 1;
+            box-sizing: border-box;
+        }
+
+        /* Shape Variants */
+        .indicator.square { width: 20px; height: 20px; border-radius: 4px; min-width: 20px; }
+        .indicator.circle { width: 20px; height: 20px; border-radius: 50%; min-width: 20px; }
+        
+        /* Oval / Pill Shape for Header */
+        .indicator.oval {
+            width: 50px;
+            height: 24px;
+            border-radius: 12px;
+            min-width: 50px;
+        }
+
+        .choice-item input:checked ~ .indicator {
+            background-color: var(--primary-blue);
+            border-color: var(--primary-blue);
+            box-shadow: inset 0 0 0 3px var(--white);
+        }
+        
+        .choice-item:hover .indicator {
+            border-color: var(--primary-blue);
+        }
+
+        /* Dynamic Items */
+        .dynamic-item {
+            position: relative;
+            background: var(--white);
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .dynamic-item:hover {
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            transform: translateY(-2px);
+        }
+
+        .delete-btn {
+            position: absolute;
+            top: -12px;
+            right: -12px;
+            background-color: var(--white);
+            color: var(--danger-red);
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            z-index: 10;
+            font-size: 18px;
+            line-height: 1;
+            transition: all 0.2s;
+        }
+
+        .delete-btn:hover {
+            background-color: var(--danger-red);
+            color: var(--white);
+            border-color: var(--danger-red);
+            transform: scale(1.1);
+        }
+
+        .add-btn {
+            width: 100%;
+            padding: 14px;
+            background-color: var(--white);
+            border: 1px dashed var(--primary-blue);
+            color: var(--primary-blue);
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: all 0.2s;
+            text-align: center;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .add-btn:hover {
+            background-color: var(--accent-blue);
+            border-style: solid;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.1);
+        }
+
+        /* Range Slider */
+        .range-container {
+            width: 100%;
+            margin-top: 10px;
+        }
+        
+        .range-values {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            font-weight: 700;
+            color: var(--primary-blue);
+            font-size: 15px;
+        }
+        
+        .range-input-number {
+            width: 110px;
+            border: 1px solid var(--border-color);
+            background: var(--white);
+            border-radius: 6px;
+            padding: 6px 10px;
+            text-align: center;
+            color: var(--primary-blue);
+            font-weight: 700;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+            transition: all 0.2s;
+        }
+        
+        .range-input-number:focus {
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+            border-color: var(--primary-blue);
+        }
+
+        .slider-track-wrapper {
+            position: relative;
+            height: 30px;
+            width: 100%;
+        }
+
+        .slider-track {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            height: 6px;
+            background: #e2e8f0;
+            border-radius: 3px;
+            z-index: 0;
+        }
+
+        .range-input {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            pointer-events: none;
+            appearance: none;
+            background: none;
+            z-index: 1;
+            margin: 0;
+            border: none;
+        }
+
+        .range-input::-webkit-slider-thumb {
+            pointer-events: auto;
+            appearance: none;
+            width: 22px;
+            height: 22px;
+            background: var(--white);
+            border: 2px solid var(--primary-blue);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+            transition: transform 0.1s;
+        }
+        
+        .range-input::-webkit-slider-thumb:hover {
+            transform: scale(1.1);
+        }
+
+        /* Layout Utils */
+        .row {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 25px;
+            width: 100%;
+        }
+
+        .columns-2 {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+        }
+
+        .text-label {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+            display: block;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .card-grid { display: grid; gap: 15px; }
+
+        /* SLA Specific Styles */
+        .sla-container {
+            border: 2px solid var(--primary-blue);
+            background-color: var(--white); /* White background per request */
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+        }
+        .sla-title {
+            font-weight: 800;
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+        }
+        .sla-rows { display: flex; flex-direction: column; gap: 18px; }
+        .sla-row { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+        .sla-label { display: flex; align-items: center; cursor: pointer; flex-grow: 1; }
+        .sla-label .label-text { font-weight: 500; font-size: 15px; color: var(--text-main); }
+        
+        .sla-input-sm { width: 80px; flex-shrink: 0; }
+        .sla-input-sm input { text-align: right; color: var(--text-main); font-weight: 600; }
+
+        /* Date Row Layout */
+        .date-row-vertical { flex-direction: column; align-items: flex-start; }
+        .sla-date-wrapper { 
+            width: 100%; 
+            margin-top: 5px; 
+            padding-left: 36px; /* Indent under text */
+            box-sizing: border-box;
+        }
+
+        /* Print Button */
+        .no-print-btn {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            padding: 14px 28px;
+            background: var(--text-main);
+            color: var(--white);
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            z-index: 100;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+        
+        .no-print-btn:hover {
+            transform: translateY(-3px);
+            background-color: black;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            body { padding: 10px; }
+            .page { padding: 25px; margin-bottom: 90px; border-radius: 0; box-shadow: none; }
+            .header-grid { grid-template-columns: 1fr; gap: 15px; }
+            .columns-2 { grid-template-columns: 1fr; }
+            h1 { font-size: 22px; margin-bottom: 25px; }
+            h2 { margin-top: 30px; }
+            
+            .salary-row {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+            }
+            .currency-wrapper { width: 100%; }
+
+            /* SLA Mobile Logic */
+            .sla-row {
+                align-items: flex-start; /* Align checkbox to top of multi-line text */
+            }
+            .sla-label {
+                margin-top: 3px; /* visual alignment */
+            }
+            .sla-row.date-row {
+                flex-wrap: wrap;
+            }
+            .sla-row.date-row .sla-label {
+                width: 100%;
+                flex: none;
+                margin-bottom: 5px;
+            }
+            .sla-input-md {
+                width: 100%;
+                margin-left: 30px; /* Indent under text */
+            }
+        }
+
+        @media (min-width: 769px) {
+            .header-grid { grid-template-columns: 1fr 1fr; }
+            .columns-2 { grid-template-columns: 1fr 1fr; }
+            .row { flex-direction: row; align-items: center; }
+            
+            .salary-row {
+                display: flex;
+                flex-direction: row;
+                align-items: flex-end;
+                gap: 20px;
+            }
+            
+            .currency-wrapper {
+                width: 300px;
+                flex-shrink: 0;
+            }
+        }
+
+        /* --- PRINT OPTIMIZATIONS --- */
+        @media print {
+            @page {
+                margin: 0; /* Remove default browser margins for full-width headers */
+                size: auto;
+            }
+
+            body {
+                background: white;
+                padding: 0;
+                margin: 0;
+                -webkit-print-color-adjust: exact; 
+                print-color-adjust: exact;
+            }
+
+            .page {
+                box-shadow: none;
+                width: 100%;
+                max-width: 100%;
+                /* Add internal padding to simulate margins, but keep 0 for header/footer to touch edges */
+                padding: 0 40px; 
+                margin: 0;
+                border: none;
+                border-radius: 0;
+            }
+
+            .no-print { display: none !important; }
+
+            /* Header & Footer Edge-to-Edge */
+            .logo-header {
+                width: 100%; /* Force full width */
+                margin: 0 -40px 20px -40px; /* Negative margin to counteract page padding */
+                width: calc(100% + 80px); /* Compensate width */
+                border-radius: 0;
+                max-height: none;
+            }
+            
+            .page-footer {
+                margin: 40px -40px 0 -40px;
+                width: calc(100% + 80px);
+                border-radius: 0;
+                border: none;
+            }
+
+            /* Content Styling */
+            h1 { font-size: 24px; margin: 10px 0 20px 0; padding-bottom: 10px; }
+            
+            h2 { 
+                font-size: 14px; 
+                margin: 20px 0 15px 0; 
+                padding: 8px 15px;
+                background: #1e40af !important; /* Solid darker blue for crispness */
+                color: #fff !important;
+                box-shadow: none;
+                border-radius: 4px;
+                page-break-after: avoid;
+            }
+
+            .section-content {
+                padding: 0;
+                margin-bottom: 20px;
+                border: none;
+                background: none;
+                page-break-inside: avoid;
+            }
+            
+            /* Ensure Grid works on paper */
+            .header-grid, .columns-2 { 
+                display: grid; 
+                grid-template-columns: 1fr 1fr; 
+                gap: 20px; 
+            }
+            .row { flex-direction: row; align-items: baseline; }
+            .salary-row { flex-direction: row; align-items: flex-end; }
+            .currency-wrapper { width: auto; min-width: 200px; }
+
+            /* Clean up Inputs for Document Look */
+            input[type="text"], input[type="number"], input[type="date"], textarea, select {
+                background: transparent !important;
+                box-shadow: none !important;
+                border: none;
+                border-bottom: 1px solid #94a3b8; /* Thin elegant line */
+                padding: 0 5px;
+                color: #000;
+                font-weight: 600;
+            }
+            
+            /* Hide Dropdown Arrows */
+            select {
+                -webkit-appearance: none;
+                appearance: none;
+                background-image: none;
+            }
+
+            /* Hide Slider Handles, just show values */
+            .range-input { display: none; }
+            .slider-track-wrapper { height: 8px; margin-top: 5px; }
+            .range-input-number { border: none; text-align: left; padding: 0; font-size: 14px; }
+
+            /* Checkboxes */
+            .choice-item input:checked ~ .indicator {
+                background-color: #2563eb !important;
+                border-color: #2563eb !important;
+                box-shadow: inset 0 0 0 3px white !important;
+            }
+            
+            .sla-container {
+                border: 2px solid #2563eb;
+                background-color: #f8fafc !important;
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <button class="no-print-btn no-print" onclick="window.print()">
+        <span>Print / PDF</span>
+    </button>
+
+    <div class="page">
+        
+        <!-- Logo Header Space -->
+        <div class="logo-header">
+            <!-- REPLACE 'image_bae918.png' with your actual logo filename -->
+            <img src="Header.png" alt="Company Logo">
+        </div>
+
+        <!-- Title -->
+        <h1>Talent Advisor Intake Form</h1>
+
+        <!-- Header Block -->
+        <div class="header-grid">
+            <div class="header-field"><span>Job Title:</span> <div class="underline"><input type="text"></div></div>
+            
+            <div class="header-field"><span>Grade:</span> <div class="underline"><input type="text"></div></div>
+            
+            <div class="header-field"><span>Dept/Squad:</span> <div class="underline"><input type="text"></div></div>
+            <div class="header-field">
+                <span>Type:</span> 
+                <div class="choice-group" style="margin-left: 0; width: 100%;"> 
+                    <!-- OVAL Indicators for Header -->
+                    <label class="choice-item"><input type="radio" name="job_origin" value="new"><span class="indicator oval"></span> New</label>
+                    <label class="choice-item"><input type="radio" name="job_origin" value="replacement"><span class="indicator oval"></span> Replacement</label>
+                </div>
+            </div>
+
+            <div class="header-field"><span>Hiring Manager:</span> <div class="underline"><input type="text"></div></div>
+            <div class="header-field">
+                <span>Approval:</span>
+                <div class="choice-group" style="margin-left: 0; width: 100%;">
+                    <!-- OVAL Indicators for Header -->
+                    <label class="choice-item"><input type="radio" name="approval" value="pending"><span class="indicator oval"></span> Pending</label>
+                    <label class="choice-item"><input type="radio" name="approval" value="approved"><span class="indicator oval"></span> Approved</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 1: Role Details -->
+        <h2>1. Role Details & Logistics</h2>
+        <div class="section-content">
+            <div class="row">
+                <span class="text-label" style="min-width: 80px;">Location:</span>
+                <div class="choice-group">
+                    <!-- CIRCLE Indicators for Body -->
+                    <label class="choice-item"><input type="radio" name="location_pref"><span class="indicator circle"></span> On-site</label>
+                    <label class="choice-item"><input type="radio" name="location_pref"><span class="indicator circle"></span> Hybrid</label>
+                    <label class="choice-item"><input type="radio" name="location_pref"><span class="indicator circle"></span> Remote</label>
+                </div>
+            </div>
+            
+            <div class="row">
+                <span class="text-label" style="min-width: 80px;">Type:</span>
+                <div class="choice-group">
+                    <label class="choice-item"><input type="radio" name="emp_type_pref"><span class="indicator circle"></span> Full-time</label>
+                    <label class="choice-item"><input type="radio" name="emp_type_pref"><span class="indicator circle"></span> Part-time</label>
+                    <label class="choice-item"><input type="radio" name="emp_type_pref"><span class="indicator circle"></span> Contract</label>
+                    <label class="choice-item"><input type="radio" name="emp_type_pref"><span class="indicator circle"></span> Freelance</label>
+                </div>
+            </div>
+
+            <div class="columns-2">
+                <div class="header-field"><span>Reporting To:</span> <div class="underline"><input type="text"></div></div>
+                <div class="header-field"><span># Openings:</span> <div class="underline"><input type="number" min="1"></div></div>
+            </div>
+
+            <div style="margin-top: 15px; border-top: 1px dashed #ccc; padding-top: 10px;">
+                <div class="row">
+                    <span class="text-label">Leadership Role?</span>
+                    <div class="choice-group">
+                        <label class="choice-item"><input type="radio" name="leadership" value="yes"><span class="indicator circle"></span> Yes</label>
+                        <label class="choice-item"><input type="radio" name="leadership" value="no"><span class="indicator circle"></span> No</label>
+                    </div>
+                </div>
+                <div class="header-field" style="margin-top: 5px;"><span>If yes, # Direct Reports:</span> <div class="underline"><input type="number" id="direct-reports"></div></div>
+            </div>
+        </div>
+
+        <!-- Section 2: Compensation -->
+        <h2>2. Compensation & Benefits</h2>
+        <div class="section-content">
+            <div class="salary-row">
+                <div class="header-field" style="flex-grow: 1; flex-direction: column; align-items: stretch; width: 100%;">
+                    <div style="margin-bottom: 5px;"><span>Salary Range:</span></div>
+                    <div class="range-container">
+                        <div class="range-values">
+                            <input type="number" id="min-input" value="0" min="0" max="300000" class="range-input-number">
+                            <span style="color: #64748b;">-</span>
+                            <input type="number" id="max-input" value="25000" min="0" max="300000" class="range-input-number">
+                        </div>
+                        <div class="slider-track-wrapper">
+                            <div class="slider-track" id="slider-track"></div>
+                            <input type="range" class="range-input" id="min-range" min="0" max="300000" value="0" step="1000">
+                            <input type="range" class="range-input" id="max-range" min="0" max="300000" value="25000" step="1000">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="header-field currency-wrapper">
+                    <span>Currency:</span> 
+                    <div class="underline">
+                        <select id="currency-select">
+                            <option value="" disabled>Select</option>
+                            <option value="USD" selected>USD - US Dollar</option>
+                            <option value="JOD">JOD - Jordanian Dinar</option>
+                            <option value="SAR">SAR - Saudi Riyal</option>
+                            <option value="AUD">AUD - Australian Dollar</option>
+                            <option value="AED">AED - UAE Dirham</option>
+                            <option value="EUR">EUR - Euro</option>
+                            <option value="GBP">GBP - British Pound</option>
+                            <option value="CAD">CAD - Canadian Dollar</option>
+                            <option value="JPY">JPY - Japanese Yen</option>
+                            <option value="INR">INR - Indian Rupee</option>
+                            <option value="CNY">CNY - Chinese Yuan</option>
+                            <option value="CHF">CHF - Swiss Franc</option>
+                            <option value="SGD">SGD - Singapore Dollar</option>
+                            <option value="HKD">HKD - Hong Kong Dollar</option>
+                            <option value="ZAR">ZAR - South African Rand</option>
+                            <option value="BRL">BRL - Brazilian Real</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <span class="text-label">Is salary flexible?</span>
+                <div class="choice-group">
+                    <label class="choice-item"><input type="radio" name="flexible" value="yes"><span class="indicator circle"></span> Yes</label>
+                    <label class="choice-item"><input type="radio" name="flexible" value="no"><span class="indicator circle"></span> No</label>
+                </div>
+            </div>
+
+            <div style="margin-top: 10px;">
+                <span class="text-label">Benefits Offered:</span>
+                <div class="choice-group" style="margin-top: 5px;">
+                    <label class="choice-item"><input type="checkbox"><span class="indicator square"></span> Bonus</label>
+                    <label class="choice-item"><input type="checkbox"><span class="indicator square"></span> Health</label>
+                    <label class="choice-item"><input type="checkbox"><span class="indicator square"></span> Equity</label>
+                    <label class="choice-item"><input type="checkbox"><span class="indicator square"></span> Allowances</label>
+                    <div class="header-field" style="flex-grow: 1; margin-left: 0; margin-top: 10px; width: 100%;"> 
+                        <span>Other:</span> <div class="underline"><input type="text"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="columns-2" style="margin-top: 15px;">
+                <div class="header-field"><span>Nationality Preference:</span> <div class="underline"><input type="text"></div></div>
+                <div class="row" style="margin: 0;">
+                    <span class="text-label">Gender Preference:</span>
+                    <div class="choice-group">
+                        <label class="choice-item"><input type="radio" name="gender" value="none"><span class="indicator circle"></span> None</label>
+                        <label class="choice-item"><input type="radio" name="gender" value="male"><span class="indicator circle"></span> Male</label>
+                        <label class="choice-item"><input type="radio" name="gender" value="female"><span class="indicator circle"></span> Female</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" style="margin-top: 15px;">
+                <span class="text-label">Notice Period:</span>
+                <div class="choice-group">
+                    <label class="choice-item"><input type="radio" name="notice_period"><span class="indicator circle"></span> Immediate</label>
+                    <label class="choice-item"><input type="radio" name="notice_period"><span class="indicator circle"></span> 1 Month</label>
+                    <label class="choice-item"><input type="radio" name="notice_period"><span class="indicator circle"></span> 2 Months</label>
+                    <label class="choice-item"><input type="radio" name="notice_period"><span class="indicator circle"></span> 3 Months</label>
+                </div>
+            </div>
+        </div>
+
+        <h2>3. Interview Process & Timeline</h2>
+        <div class="section-content">
+            <div class="columns-2">
+                <div class="header-field"><span># Stages:</span> <div class="underline"><input type="number" min="1"></div></div>
+                <div class="header-field"><span>Target Date:</span> <div class="underline"><input type="date"></div></div>
+            </div>
+            
+            <div class="columns-2" style="margin-top: 15px;">
+                <div class="row" style="margin: 0;">
+                    <span class="text-label">Format:</span>
+                    <div class="choice-group">
+                        <label class="choice-item"><input type="radio" name="interview_fmt"><span class="indicator circle"></span> Online</label>
+                        <label class="choice-item"><input type="radio" name="interview_fmt"><span class="indicator circle"></span> On-site</label>
+                        <label class="choice-item"><input type="radio" name="interview_fmt"><span class="indicator circle"></span> Mixed</label>
+                    </div>
+                </div>
+                <div class="row" style="margin: 0;">
+                    <span class="text-label">Assignment/Case Study?</span>
+                    <div class="choice-group">
+                        <label class="choice-item"><input type="radio" name="case_study" value="yes"><span class="indicator circle"></span> Yes</label>
+                        <label class="choice-item"><input type="radio" name="case_study" value="no"><span class="indicator circle"></span> No</label>
+                    </div>
+                </div>
+            </div>
+
+             <div class="row" style="margin-top: 15px;">
+                <span class="text-label">Priority:</span>
+                <div class="choice-group">
+                    <label class="choice-item"><input type="radio" name="priority"><span class="indicator circle"></span> Low</label>
+                    <label class="choice-item"><input type="radio" name="priority"><span class="indicator circle"></span> Med</label>
+                    <label class="choice-item"><input type="radio" name="priority"><span class="indicator circle"></span> High</label>
+                </div>
+            </div>
+        </div>
+
+        <h2>4. Role Calibration (The "WHO")</h2>
+        <div class="section-content">
+            <span class="text-label" style="font-style: italic; color: var(--primary-blue);">1-Year Success Definition:</span>
+            <textarea rows="3" placeholder="What specific results must they have achieved 1 year from now?"></textarea>
+        </div>
+
+        <div class="columns-2" style="margin-top: 20px;">
+            <!-- Must Haves -->
+            <div>
+                <h3 style="font-size: 14px; color: var(--text-main); border-bottom: 2px solid var(--danger-red); padding-bottom: 5px;">Must-Haves (Deal Breakers)</h3>
+                <div id="must-haves-container" class="card-grid">
+                    <div class="dynamic-item">
+                        <button class="delete-btn no-print" onclick="deleteItem(this)">×</button>
+                        <div class="header-field"><span>1.</span> <div class="underline"><input type="text"></div></div>
+                    </div>
+                    <div class="dynamic-item">
+                        <button class="delete-btn no-print" onclick="deleteItem(this)">×</button>
+                        <div class="header-field"><span>2.</span> <div class="underline"><input type="text"></div></div>
+                    </div>
+                </div>
+                <button class="add-btn no-print" onclick="addItem('must-haves-container')">+ Add Deal Breaker</button>
+            </div>
+
+            <!-- Nice to Haves -->
+            <div>
+                <h3 style="font-size: 14px; color: var(--text-main); border-bottom: 2px solid var(--primary-blue); padding-bottom: 5px;">Teachable (Nice-to-Haves)</h3>
+                <div id="nice-to-haves-container" class="card-grid">
+                    <div class="dynamic-item">
+                        <button class="delete-btn no-print" onclick="deleteItem(this)">×</button>
+                        <div class="header-field"><span>1.</span> <div class="underline"><input type="text"></div></div>
+                    </div>
+                    <div class="dynamic-item">
+                        <button class="delete-btn no-print" onclick="deleteItem(this)">×</button>
+                        <div class="header-field"><span>2.</span> <div class="underline"><input type="text"></div></div>
+                    </div>
+                </div>
+                <button class="add-btn no-print" onclick="addItem('nice-to-haves-container')">+ Add Nice-to-Have</button>
+            </div>
+        </div>
+
+        <h2>5. Sourcing Strategy</h2>
+        <div id="sourcing-container">
+            <div class="dynamic-item">
+                <button class="delete-btn no-print" onclick="deleteItem(this)">×</button>
+                <div class="text-label" style="color: var(--primary-blue); margin-bottom: 8px;">Target Set 1</div>
+                <div class="columns-2">
+                    <div class="header-field" style="flex-direction: column; align-items: flex-start;">
+                        <span style="font-size: 12px; color: #64748b;">Target Industries</span>
+                        <textarea rows="2"></textarea>
+                    </div>
+                    <div class="header-field" style="flex-direction: column; align-items: flex-start;">
+                        <span style="font-size: 12px; color: #64748b;">Target Companies</span>
+                        <textarea rows="2"></textarea>
+                    </div>
+                </div>
+                <div class="header-field" style="flex-direction: column; align-items: flex-start; margin-top: 10px;">
+                     <span style="font-size: 12px; color: #64748b;">Job Titles / Keywords</span>
+                     <div class="underline" style="width: 100%;"><input type="text"></div>
+                </div>
+            </div>
+        </div>
+        <button class="add-btn no-print" onclick="addItem('sourcing-container')">+ Add Sourcing Target Set</button>
+        
+        <div class="section-content" style="margin-top: 20px; border: 2px solid #ef4444; background-color: #fef2f2;">
+            <div class="header-field"><span style="color: #ef4444;">Anti-Persona (Do NOT Contact):</span> <div class="underline" style="border-color: #ef4444;"><input type="text" placeholder="Companies/Titles to avoid"></div></div>
+        </div>
+
+        <h2>6. Process & SLAs</h2>
+        <div id="process-container">
+            <div class="dynamic-item">
+                <button class="delete-btn no-print" onclick="deleteItem(this)">×</button>
+                <div class="header-field" style="margin-bottom: 5px;">
+                    <span>Stage 1:</span> <div class="underline"><input type="text" value="Recruiter Screen"></div>
+                </div>
+                <div class="columns-2">
+                    <div class="header-field"><span>Interviewer:</span> <div class="underline"><input type="text"></div></div>
+                    <div class="header-field"><span>Focus:</span> <div class="underline"><input type="text"></div></div>
+                </div>
+            </div>
+             <div class="dynamic-item">
+                <button class="delete-btn no-print" onclick="deleteItem(this)">×</button>
+                <div class="header-field" style="margin-bottom: 5px;">
+                    <span>Stage 2:</span> <div class="underline"><input type="text" value="Hiring Manager"></div>
+                </div>
+                <div class="columns-2">
+                    <div class="header-field"><span>Interviewer:</span> <div class="underline"><input type="text"></div></div>
+                    <div class="header-field"><span>Focus:</span> <div class="underline"><input type="text"></div></div>
+                </div>
+            </div>
+        </div>
+        <button class="add-btn no-print" onclick="addItem('process-container')">+ Add Interview Stage</button>
+
+        <!-- SLA Commitment Section -->
+        <div class="sla-container" style="margin-top: 20px;">
+            <div class="sla-title">Recruitment SLA Commitment:</div>
+            <div class="sla-rows">
+                <div class="sla-row">
+                    <label class="sla-label">
+                        <span class="indicator square"><input type="checkbox" style="opacity: 0; width: 100%; height: 100%;"></span>
+                        <span class="label-text">HM: Feedback on CVs within</span>
+                    </label>
+                    <div class="underline sla-input-sm"><input type="text" value="24h"></div>
+                </div>
+                
+                <div class="sla-row">
+                    <label class="sla-label">
+                        <span class="indicator square"><input type="checkbox" style="opacity: 0; width: 100%; height: 100%;"></span>
+                        <span class="label-text">HM: Interview feedback within</span>
+                    </label>
+                    <div class="underline sla-input-sm"><input type="text" value="24h"></div>
+                </div>
+
+                <div class="sla-row date-row-vertical">
+                    <label class="sla-label">
+                        <span class="indicator square"><input type="checkbox" style="opacity: 0; width: 100%; height: 100%;"></span>
+                        <span class="label-text">Recruiter: Submit profiles by:</span>
+                    </label>
+                    <div class="underline sla-date-wrapper">
+                        <input type="date" class="future-date">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <img src="footer.png" alt="Footer Image">
+        </div>
+
+    </div>
+
+    <!-- Scripts for Dynamic Functionality -->
+    <script>
+        function addItem(containerId) {
+            const container = document.getElementById(containerId);
+            const count = container.children.length + 1;
+            const div = document.createElement('div');
+            div.className = 'dynamic-item';
+
+            if (containerId === 'must-haves-container' || containerId === 'nice-to-haves-container') {
+                div.innerHTML = `
+                    <button class="delete-btn no-print" onclick="deleteItem(this)">×</button>
+                    <div class="header-field"><span>${count}.</span> <div class="underline"><input type="text"></div></div>
+                `;
+            } 
+            else if (containerId === 'sourcing-container') {
+                div.innerHTML = `
+                    <button class="delete-btn no-print" onclick="deleteItem(this)">×</button>
+                    <div class="text-label" style="color: var(--primary-blue); margin-bottom: 8px;">Target Set ${count}</div>
+                    <div class="columns-2">
+                        <div class="header-field" style="flex-direction: column; align-items: flex-start;">
+                            <span style="font-size: 12px; color: #64748b;">Target Industries</span>
+                            <textarea rows="2"></textarea>
+                        </div>
+                        <div class="header-field" style="flex-direction: column; align-items: flex-start;">
+                            <span style="font-size: 12px; color: #64748b;">Target Companies</span>
+                            <textarea rows="2"></textarea>
+                        </div>
+                    </div>
+                    <div class="header-field" style="flex-direction: column; align-items: flex-start; margin-top: 10px;">
+                        <span style="font-size: 12px; color: #64748b;">Job Titles / Keywords</span>
+                        <div class="underline" style="width: 100%;"><input type="text"></div>
+                    </div>
+                `;
+            }
+            else if (containerId === 'process-container') {
+                div.innerHTML = `
+                    <button class="delete-btn no-print" onclick="deleteItem(this)">×</button>
+                    <div class="header-field" style="margin-bottom: 5px;">
+                        <span>Stage ${count}:</span> <div class="underline"><input type="text"></div>
+                    </div>
+                    <div class="columns-2">
+                        <div class="header-field"><span>Interviewer:</span> <div class="underline"><input type="text"></div></div>
+                        <div class="header-field"><span>Focus:</span> <div class="underline"><input type="text"></div></div>
+                    </div>
+                `;
+            }
+
+            container.appendChild(div);
+            renumberItems(containerId);
+        }
+
+        function deleteItem(btn) {
+            const item = btn.closest('.dynamic-item');
+            const container = item.parentElement;
+            item.remove();
+            renumberItems(container.id);
+        }
+
+        function renumberItems(containerId) {
+            const container = document.getElementById(containerId);
+            const items = container.querySelectorAll('.dynamic-item');
+
+            items.forEach((item, index) => {
+                const count = index + 1;
+                
+                if (containerId === 'must-haves-container' || containerId === 'nice-to-haves-container') {
+                    const span = item.querySelector('.header-field span');
+                    if(span) span.textContent = `${count}.`;
+                }
+                else if (containerId === 'sourcing-container') {
+                    const label = item.querySelector('.text-label');
+                    if(label) label.textContent = `Target Set ${count}`;
+                }
+                else if (containerId === 'process-container') {
+                    const span = item.querySelector('.header-field span');
+                    if(span) span.textContent = `Stage ${count}:`;
+                }
+            });
+        }
+        
+        // --- Slider Logic ---
+        const minRange = document.getElementById('min-range');
+        const maxRange = document.getElementById('max-range');
+        const minInput = document.getElementById('min-input');
+        const maxInput = document.getElementById('max-input');
+        const track = document.getElementById('slider-track');
+        let maxVal = 25000; // Default for USD
+        const minGap = 1000;
+
+        // Currency handling
+        const currencySelect = document.getElementById('currency-select');
+
+        function updateCurrencyLimits() {
+            const currency = currencySelect.value;
+            switch(currency) {
+                case 'JOD':
+                    maxVal = 15000;
+                    break;
+                case 'USD':
+                    maxVal = 25000;
+                    break;
+                case 'SAR':
+                case 'AUD':
+                    maxVal = 100000;
+                    break;
+                default:
+                    maxVal = 300000;
+            }
+
+            // Update attributes
+            minRange.max = maxVal;
+            maxRange.max = maxVal;
+            minInput.max = maxVal;
+            maxInput.max = maxVal;
+
+            // Adjust values if they exceed new max
+            if (parseInt(maxInput.value) > maxVal) {
+                maxInput.value = maxVal;
+                maxRange.value = maxVal;
+            }
+            // Ensure min is also within range
+            if (parseInt(minInput.value) > maxVal) {
+                minInput.value = Math.max(0, maxVal - minGap);
+                minRange.value = minInput.value;
+            }
+            
+            // Re-sync UI
+            updateSlider();
+        }
+
+        currencySelect.addEventListener('change', updateCurrencyLimits);
+
+        function updateSlider() {
+            let min = parseInt(minRange.value);
+            let max = parseInt(maxRange.value);
+
+            // Prevent crossing for slider
+            if (max - min <= minGap) {
+                if (this === minRange) {
+                    minRange.value = max - minGap;
+                } else {
+                    maxRange.value = min + minGap;
+                }
+            }
+            
+            // Re-read values
+            min = parseInt(minRange.value);
+            max = parseInt(maxRange.value);
+
+            // Update numeric inputs
+            minInput.value = min;
+            maxInput.value = max;
+
+            fillTrack(min, max);
+        }
+
+        function updateInputs() {
+            let min = parseInt(minInput.value) || 0;
+            let max = parseInt(maxInput.value) || 0;
+            
+            // Validate bounds
+            if (min < 0) min = 0;
+            if (max > maxVal) max = maxVal;
+            
+            // Sync Slider
+            minRange.value = min;
+            maxRange.value = max;
+            
+            fillTrack(min, max);
+        }
+
+        function fillTrack(min, max) {
+            const percent1 = (min / maxVal) * 100;
+            const percent2 = (max / maxVal) * 100;
+            track.style.background = `linear-gradient(to right, #cbd5e1 ${percent1}%, var(--primary-blue) ${percent1}%, var(--primary-blue) ${percent2}%, #cbd5e1 ${percent2}%)`;
+        }
+
+        // Initialize Slider & Event Listeners
+        if(minRange && maxRange && minInput && maxInput) {
+            minRange.addEventListener('input', updateSlider);
+            maxRange.addEventListener('input', updateSlider);
+            minInput.addEventListener('input', updateInputs);
+            maxInput.addEventListener('input', updateInputs);
+            updateCurrencyLimits(); // Initial setup based on default currency (USD)
+        }
+
+        // --- Leadership Toggle ---
+        const directReportsInput = document.getElementById('direct-reports');
+        const leadershipRadios = document.querySelectorAll('input[name="leadership"]');
+
+        leadershipRadios.forEach(radio => {
+            radio.addEventListener('change', function() {
+                if (this.value === 'no') {
+                    directReportsInput.disabled = true;
+                    directReportsInput.value = '';
+                    directReportsInput.parentElement.style.opacity = '0.5';
+                } else {
+                    directReportsInput.disabled = false;
+                    directReportsInput.parentElement.style.opacity = '1';
+                }
+            });
+        });
+
+        // --- Date Validation & UX (Prevent Past Dates & Open Picker on Click) ---
+        const dateInputs = document.querySelectorAll('input[type="date"]');
+        
+        // Use local time for 'today' calculation to avoid UTC mismatch issues
+        const now = new Date();
+        const yyyy = now.getFullYear();
+        const mm = String(now.getMonth() + 1).padStart(2, '0');
+        const dd = String(now.getDate()).padStart(2, '0');
+        const todayLocal = `${yyyy}-${mm}-${dd}`;
+        
+        dateInputs.forEach(input => {
+            input.setAttribute('min', todayLocal);
+            
+            // Make clicking anywhere on the input open the calendar picker
+            input.addEventListener('click', function(e) {
+                // Prevent default behavior which might focus text cursor instead of opening picker on some browsers
+                e.preventDefault();
+                
+                // Check if browser supports showPicker (modern browsers)
+                try {
+                    if (typeof this.showPicker === 'function') {
+                        this.showPicker();
+                    }
+                } catch (err) {
+                    console.log('Error showing date picker:', err);
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
